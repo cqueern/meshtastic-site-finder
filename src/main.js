@@ -125,6 +125,7 @@ function isCandidate(tags) {
    Leaflet map
 ===================== */
 var map = L.map("map").setView([30.2672, -97.7431], 11);
+
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: "&copy; OpenStreetMap contributors"
@@ -140,6 +141,24 @@ L.Icon.Default.mergeOptions({
   iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png"
+});
+
+/* =====================
+   Leaflet sizing fix (GitHub Pages tile partial load)
+===================== */
+function fixLeafletSizeSoon() {
+  // Run a few times to survive slow CSS/layout settle on GitHub Pages
+  setTimeout(function () { map.invalidateSize(true); }, 50);
+  setTimeout(function () { map.invalidateSize(true); }, 250);
+  setTimeout(function () { map.invalidateSize(true); }, 800);
+}
+
+// Trigger once at startup
+fixLeafletSizeSoon();
+
+// Also fix on resize
+window.addEventListener("resize", function () {
+  map.invalidateSize(true);
 });
 
 /* =====================
@@ -514,6 +533,8 @@ function renderResults(center, candidates, critical) {
   if (pts.length > 0) {
     var bounds = L.latLngBounds(pts);
     map.fitBounds(bounds.pad(0.15));
+    // Fix partial-tile rendering after a fitBounds on Pages
+    fixLeafletSizeSoon();
   }
 }
 
