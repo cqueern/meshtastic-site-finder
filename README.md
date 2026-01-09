@@ -1,6 +1,6 @@
 # Meshtastic Site Finder
 
-**Meshtastic Site Finder** is a lightweight web application for identifying, mapping, and evaluating potential locations for Meshtastic nodes—especially fixed, solar-powered, or infrastructure-mounted deployments.
+**Meshtastic Site Finder** is a lightweight web application for identifying, mapping, and evaluating potential locations for <a href="https://en.wikipedia.org/wiki/Meshtastic" target="_blank">Meshtastic</a> nodes—especially fixed, solar-powered, or infrastructure-mounted deployments.
 
 The goal is to help communities build **more resilient, better-placed Meshtastic networks** by making it easier to visualize geography, elevation, and existing structures that are well-suited for long-range LoRa mesh coverage.
 
